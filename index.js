@@ -7,6 +7,7 @@ const ethereumUnits = require('ethereumjs-units')
 const bitcoinjs = require('bitcoinjs-lib')
 const prompt = require('prompt')
 const yargs = require('yargs')
+const qrcode = require('qrcode-terminal')
 
 var decimalToHex = function (number) {
   if (typeof number === 'string') {
@@ -68,6 +69,12 @@ var buildTx = function (mnemonic, argv) {
   console.log('')
   console.log('--- Signed Transaction ----')
   console.log(tx.serialize().toString('hex'))
+  console.log('')
+  console.log('')
+  console.log('--- QRCode of Signed Transaction ----')
+  console.log('')
+  console.log('')
+  qrcode.generate(tx.serialize().toString('hex'), { small: true })
 }
 
 var signTx = function (argv) {
